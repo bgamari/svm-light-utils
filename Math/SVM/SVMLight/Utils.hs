@@ -28,11 +28,11 @@ import qualified Data.ByteString.Builder as BSB
 import qualified Data.ByteString.Char8 as BS
 
 newtype Qid = Qid Int
-	    deriving (Show, Ord, Eq)
+            deriving (Show, Ord, Eq)
 
 -- | A feature identifier
 newtype FeatureIdx = FIdx Int
-	           deriving (Show, Ord, Eq)
+                   deriving (Show, Ord, Eq)
 
 featureIdx :: Parser FeatureIdx
 featureIdx = fmap FIdx decimal
