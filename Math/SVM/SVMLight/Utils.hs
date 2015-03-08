@@ -19,6 +19,7 @@ module Math.SVM.SVMLight.Utils
 import Data.Monoid
 import Data.Foldable (foldMap)
 import Data.List (intersperse)
+import Data.Char (ord)
 import Control.Applicative
 
 import qualified Data.Map.Strict as M
@@ -61,7 +62,7 @@ point =  do
     skipSpace
     comment <- optional $ do
       char '#'
-      BS.pack <$> anyChar `manyTill` endOfLine
+      takeTill (not . isEndOfLine . fromIntegral . ord)
     skipSpace
     return $ Point label qid (M.fromList features) comment
   where
