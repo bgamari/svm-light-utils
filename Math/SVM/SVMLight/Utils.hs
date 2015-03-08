@@ -36,9 +36,11 @@ newtype FeatureIdx = FIdx Int
 
 featureIdx :: Parser FeatureIdx
 featureIdx = fmap FIdx decimal
+{-# INLINE featureIdx #-}
 
 qid :: Parser Qid
 qid = Qid <$> ("qid:" *> decimal)
+{-# INLINE qid #-}
 
 -- | A sample point (e.g. a line of an SVMlight input file).
 data Point = Point { pLabel    :: !Int
@@ -64,10 +66,12 @@ point =  do
     return $ Point label qid (M.fromList features) comment
   where
     feature = (,) <$> featureIdx <* char ':' <*> double
+{-# INLINE point #-}
 
 -- | A @Builder@ containing the given @Point@s
 renderPoints :: [Point] -> BSB.Builder
 renderPoints pts = mconcat $ intersperse "\n" $ map renderPoint pts
+{-# INLINEABLE renderPoints #-}
 
 -- | A @Builder@ containing the given @Point@
 renderPoint :: Point -> BSB.Builder
@@ -77,4 +81,5 @@ renderPoint pt =
     vs = map (\(FIdx i,v)->BSB.intDec i<>":"<>BSB.doubleDec v) $ M.assocs (pFeatures pt)
     c = maybe [] (\c->[" #"<>BSB.byteString c]) (pComment pt)
     qid = maybe [] (\(Qid q)->["qid:"<>BSB.intDec q]) (pQid pt)
+{-# INLINEABLE renderPoint #-}
 
