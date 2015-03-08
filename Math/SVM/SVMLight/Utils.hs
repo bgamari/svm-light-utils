@@ -21,7 +21,7 @@ import Data.Foldable (foldMap)
 import Data.List (intersperse)
 import Control.Applicative
 
-import qualified Data.Map as M
+import qualified Data.Map.Strict as M
 
 import Data.Attoparsec.ByteString.Char8 as AP
 import qualified Data.ByteString.Builder as BSB
