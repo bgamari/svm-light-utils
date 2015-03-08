@@ -62,6 +62,7 @@ point =  do
     skipSpace
     comment <- optional $ do
       char '#'
+      skipSpace
       takeTill (not . isEndOfLine . fromIntegral . ord)
     skipSpace
     return $ Point label qid (M.fromList features) comment
