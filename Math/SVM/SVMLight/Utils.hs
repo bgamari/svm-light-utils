@@ -58,16 +58,16 @@ point =  do
     skipSpace
     qid <- optional qid
     skipSpace
-    features <- feature `sepBy'` char ' '
+    features <- M.unions <$> feature `sepBy` char ' '
     skipSpace
     comment <- optional $ do
       char '#'
       skipSpace
       takeTill (isEndOfLine . fromIntegral . ord)
     skipSpace
-    return $ Point label qid (M.fromList features) comment
+    return $ Point label qid features comment
   where
-    feature = (,) <$> featureIdx <* char ':' <*> double
+    feature = M.singleton <$> featureIdx <* char ':' <*> double
 {-# INLINE point #-}
 
 -- | A @Builder@ containing the given @Point@s
