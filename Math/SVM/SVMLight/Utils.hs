@@ -41,10 +41,10 @@ qid :: Parser Qid
 qid = Qid <$> ("qid:" *> decimal)
 
 -- | A sample point (e.g. a line of an SVMlight input file).
-data Point = Point { pLabel    :: Int
-                   , pQid      :: Maybe Qid
-                   , pFeatures :: M.Map FeatureIdx Double
-                   , pComment  :: Maybe BS.ByteString
+data Point = Point { pLabel    :: !Int
+                   , pQid      :: !(Maybe Qid)
+                   , pFeatures :: !(M.Map FeatureIdx Double)
+                   , pComment  :: !(Maybe BS.ByteString)
                    }
            deriving (Show, Ord, Eq)
 
