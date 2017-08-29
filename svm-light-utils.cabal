@@ -1,5 +1,6 @@
 name:                svm-light-utils
 version:             0.1.4
+x-revision:          1
 synopsis:            Parsers and formatters for the SVMlight input file format
 description:         Parsers and formatters for the SVMlight input file format
 homepage:            http://github.com/bgamari/svm-light-utils
